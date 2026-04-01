@@ -209,3 +209,11 @@ __marimo__/
 # VideoRAG Runtime Data
 data/
 data/*.db
+
+# Claude Code
+.claude/
+
+# Speckit planning artifacts
+specs/
+.specify/
+CLAUDE.md
