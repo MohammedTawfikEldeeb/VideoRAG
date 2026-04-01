@@ -1,0 +1,33 @@
+# Large user data — never needed in build context
+videos/
+clips/
+
+# Application state volumes
+.pixeltable/
+.records/
+
+# Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Git / IDE / tooling
+.git/
+.gitignore
+.claude/
+.python-version
+
+# Video/media files anywhere in project
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+*.flv
+*.wmv

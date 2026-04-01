@@ -1,0 +1,20 @@
+[project]
+name = "videorag"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "langchain>=1.2.14",
+    "langchain-core>=1.2.23",
+    "langchain-openai>=1.1.12",
+    "langgraph>=1.1.4",
+    "langgraph-checkpoint-sqlite>=2.0",
+    "loguru>=0.7.3",
+    "moviepy>=2.2.1",
+    "openai>=2.30.0",
+    "opik>=1.0.0",
+    "pixeltable>=0.5.23",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.13.1",
+]
