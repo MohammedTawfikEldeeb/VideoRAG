@@ -6,6 +6,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore", env_file_encoding="utf-8")
 
+    APP_VERSION: str = "0.1.0"
+
     # --- OpenRouter Configuration ---
     OPENROUTER_API_KEY: str
     OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
@@ -54,6 +56,15 @@ class Settings(BaseSettings):
     VIDEOS_DIR: str = "videos"
     CLIPS_DIR: str = "clips"
     RECORDS_DIR: str = ".records"
+    CONVERSATIONS_DB_URL: str = "sqlite+aiosqlite:///./data/conversations.db"
+
+    # --- API Configuration ---
+    API_HOST: str = "0.0.0.0"
+    API_PORT: int = 8000
+
+    # --- Celery Configuration ---
+    CELERY_BROKER_URL: str = "amqp://guest:guest@localhost:5672//"
+    CELERY_RESULT_BACKEND: str = "redis://localhost:6379/0"
 
     # --- LangGraph Agent Configuration ---
     MEMORY_DB_PATH: str = "./data/memory.db"

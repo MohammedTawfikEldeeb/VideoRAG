@@ -209,6 +209,8 @@ __marimo__/
 # VideoRAG Runtime Data
 data/
 data/*.db
+runtime/
+cache_*/
 
 # Claude Code
 .claude/

@@ -1,4 +1,4 @@
-"""LangGraph nodes for the VideoRAG agent."""
+﻿"""LangGraph nodes for the VideoRAG agent."""
 
 import base64
 import io
@@ -16,7 +16,6 @@ from moviepy import VideoFileClip
 from src.agent.prompts import ROUTING_SYSTEM_PROMPT, TOOL_USE_SYSTEM_PROMPT, GENERAL_SYSTEM_PROMPT
 from src.agent.state import AgentState, RouterOutput
 from src.agent.tools import (
-    process_video,
     get_video_clip_from_user_query,
     get_video_clip_from_image,
     ask_question_about_video,
@@ -97,7 +96,6 @@ def tool_node(state: AgentState) -> dict[str, Any]:
 
     # Prepare tools
     tools = [
-        process_video,
         get_video_clip_from_user_query,
         get_video_clip_from_image,
         ask_question_about_video,
@@ -214,4 +212,5 @@ def summarize_node(state: AgentState) -> dict[str, Any]:
         "summary": new_summary,
         "messages": messages_to_delete,
     }
+
 

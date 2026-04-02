@@ -1,0 +1,44 @@
+services:
+  api:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672//
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - rabbitmq
+      - redis
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./runtime:/runtime
+
+  worker:
+    build:
+      context: .
+    env_file:
+      - .env
+    environment:
+      CELERY_BROKER_URL: amqp://guest:guest@rabbitmq:5672//
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - rabbitmq
+      - redis
+    command: ["celery", "-A", "src.worker.celery_app", "worker", "--loglevel=info", "-Q", "video_processing"]
+    volumes:
+      - ./runtime:/runtime
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"

@@ -1,40 +1,21 @@
-"""LangChain tool wrappers for VideoRAG agent."""
+﻿"""LangChain tool wrappers for VideoRAG agent."""
 
-from langchain_core.tools import tool
-
-from src.services.video.processor.tools import extract_video_clip
-from src.services.video.processor.video_processor import VideoProcessor
-from src.services.video import VideoSearchEngine
-from src.config import get_settings
 from pathlib import Path
 from uuid import uuid4
+
+from langchain_core.tools import tool
 from loguru import logger
+
+from src.config import get_settings
+from src.services.video import VideoSearchEngine
+from src.services.video.processor.tools import extract_video_clip
+from src.services.video.processor.video_processor import VideoProcessor
 
 logger = logger.bind(name="AgentTools")
 settings = get_settings()
-video_processor = VideoProcessor()
 
 # Ensure clips output directory exists
 Path(settings.CLIPS_DIR).mkdir(parents=True, exist_ok=True)
-
-
-@tool
-def process_video(video_path: str) -> str:
-    """Process a video file and prepare it for searching.
-
-    Args:
-        video_path: Path to the video file to process.
-
-    Returns:
-        Success message indicating the video was processed.
-    """
-    exists = video_processor._check_if_exists(video_path)
-    if exists:
-        logger.info(f"Video index for '{video_path}' already exists and is ready for use.")
-        return f"Video '{video_path}' already indexed and ready"
-    video_processor.setup_table(video_name=video_path)
-    is_done = video_processor.add_video(video_path=video_path)
-    return f"Video '{video_path}' processed successfully" if is_done else f"Failed to process '{video_path}'"
 
 
 @tool

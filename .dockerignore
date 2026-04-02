@@ -1,6 +1,9 @@
 # Large user data — never needed in build context
 videos/
 clips/
+runtime/
+data/
+cache_*/
 
 # Application state volumes
 .pixeltable/
@@ -11,6 +14,8 @@ clips/
 **/*.pyc
 **/*.pyo
 **/*.pyd
+.venv/
+venv/
 
 # Environment secrets
 .env
